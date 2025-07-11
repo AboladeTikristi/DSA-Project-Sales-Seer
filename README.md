@@ -24,8 +24,8 @@ It provides a simple, interactive interface for users to upload data, and get ac
 - Anaconda Prompt
 - Machine Learning
 
-  ## DataSets
+## DataSet Uses
 
-  The data set was chosen from Kaggle.com, you can search here https://www.kaggle.com/datasets/zahidmughal2343/supplement-sales-data?resource=download
+📁 The data set was chosen from Kaggle.com, you can search here https://www.kaggle.com/datasets/zahidmughal2343/supplement-sales-data?resource=download
 
   
