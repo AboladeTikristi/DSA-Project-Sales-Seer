@@ -2,6 +2,7 @@ import joblib
 from flask import Flask, request,json, jsonify, render_template
 from flask_cors import CORS
 import numpy as np
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -54,6 +55,9 @@ def predict():
             # "probability": round(float(proba), 4)
         })
 
-if __name__ == '__main__':
-    app.run( port=3000, debug=True)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 3000))  # Use the port Render provides
+    app.run(host="0.0.0.0", port=port)
+
     # app.run(debug=True)
