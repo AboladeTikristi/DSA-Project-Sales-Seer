@@ -86,23 +86,27 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Load all models once at startup
-try:
-    model = joblib.load("sales_Quantity_without discount_prediction_model.pkl")
-    model1 = joblib.load("sales_Revenue_with discount_prediction_model.pkl")
-    model2 = joblib.load("sales_Quantity_without discount_prediction_model.pkl")
-    model3 = joblib.load("sales_Quantity_with discount_prediction_model.pkl")
-    print("✅ All models loaded successfully")
-except Exception as e:
-    print(f"❌ Error loading model: {e}")
-    model = model1 = model2 = model3 = None
+
 
 @app.route('/')
 def home():
     return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
+
 def predict():
+
+    # Load all models once at startup
+    try:
+        model = joblib.load("sales_Quantity_without discount_prediction_model.pkl")
+        model1 = joblib.load("sales_Revenue_with discount_prediction_model.pkl")
+        model2 = joblib.load("sales_Quantity_without discount_prediction_model.pkl")
+        model3 = joblib.load("sales_Quantity_with discount_prediction_model.pkl")
+        print("✅ All models loaded successfully")
+    except Exception as e:
+        print(f"❌ Error loading model: {e}")
+        model = model1 = model2 = model3 = None
+        
     if not all([model, model1, model2, model3]):
         return jsonify({"error": "Models not loaded"}), 500
 
