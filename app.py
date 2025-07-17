@@ -7,6 +7,16 @@ import os
 app = Flask(__name__)
 CORS(app)
 
+model = None
+try:
+    if os.path.exists("sales_Quantity_without discount_prediction_model.pkl"):
+        model2 = joblib.load("sales_Quantity_without discount_prediction_model.pkl")
+        print("✅ Model loaded successfully")
+    else:
+        print("❌ Model file not found!")
+except Exception as e:
+    print(f"❌ Error loading model: {e}")
+    model2 = None
 
 @app.route('/')
 def home():
@@ -19,10 +29,13 @@ def predict():
         data = request.json
         features = data.get('features', None)
         # Load your trained XGBoost model (make sure this file exists)
-        model = joblib.load("sales_Revenue_without discount_prediction_model.pkl")
+        # model = joblib.load("sales_Revenue_without discount_prediction_model.pkl")
         model1 = joblib.load("sales_Revenue_with discount_prediction_model.pkl")
         model2 = joblib.load("sales_Quantity_without discount_prediction_model.pkl")
         model3 = joblib.load("sales_Quantity_with discount_prediction_model.pkl")
+
+        if model is None:
+            return jsonify({"error": "Model not loaded"}), 500
             
         # return jsonify({"received": features})
     except Exception as e:
@@ -61,3 +74,6 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=port)
 
     # app.run(debug=True)
+
+
+    
