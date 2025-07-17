@@ -287,21 +287,21 @@
           resultDiv.style.color = 'red';
           resultDiv.textContent = 'Error: ' + (errorData.error || 'Unknown error');
         } else {
-         
+
           const data = await response.json();
- console.log(data);
-          var prediction = data.prediction 
+          console.log(data);
+          var prediction = data.prediction
           var prediction1 = data.prediction1
           var prediction2 = data.prediction2
           var prediction3 = data.prediction3
 
           resultDiv2.style.display = 'block';
 
-          if (prediction > prediction1 && prediction2 > prediction3 ||prediction > prediction1 && prediction2 == prediction3 || prediction > prediction1 && prediction3 - prediction3<50) {
+          if (prediction > prediction1 && prediction2 > prediction3 || prediction > prediction1 && prediction2 == prediction3 || prediction > prediction1 && prediction3 - prediction3 < 50) {
 
             resultDiv.innerHTML += `Sales Prediction without discount: \n $ ${Math.round(prediction)} at quantity of ${Math.round(prediction2)}  \n 
             <br>
-            with discount: \n $ ${ Math.round(prediction1)} at quantity of ${Math.round(prediction3)}. \n 
+            with discount: \n $ ${Math.round(prediction1)} at quantity of ${Math.round(prediction3)}. \n 
             <br/>
             <hr>
             <span style='color:white;'>  You can continue selling without discounts </span>
