@@ -7,12 +7,6 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Load your trained XGBoost model (make sure this file exists)
-model = joblib.load("sales_Revenue_without discount_prediction_model.pkl")
-model1 = joblib.load("sales_Revenue_with discount_prediction_model.pkl")
-model2 = joblib.load("sales_Quantity_without discount_prediction_model.pkl")
-model3 = joblib.load("sales_Quantity_with discount_prediction_model.pkl")
-
 
 @app.route('/')
 def home():
@@ -20,10 +14,16 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    
     try:
         data = request.json
         features = data.get('features', None)
-    
+        # Load your trained XGBoost model (make sure this file exists)
+        model = joblib.load("sales_Revenue_without discount_prediction_model.pkl")
+        model1 = joblib.load("sales_Revenue_with discount_prediction_model.pkl")
+        model2 = joblib.load("sales_Quantity_without discount_prediction_model.pkl")
+        model3 = joblib.load("sales_Quantity_with discount_prediction_model.pkl")
+            
         # return jsonify({"received": features})
     except Exception as e:
         print("Error:", e)
